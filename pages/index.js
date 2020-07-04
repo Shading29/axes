@@ -1,4 +1,3 @@
-import Homepage from "./Main/Homepage";
-import "./opensans.css"
+import Homepage from "./components/Homepage";
 
 export default Homepage;

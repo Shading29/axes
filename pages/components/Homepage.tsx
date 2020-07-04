@@ -1,61 +1,21 @@
 import React from "react";
-import { IList, IListItem } from "./interfaces";
-import {
-  LowerTree,
-  TreeWrapper,
-  TreeBody,
-  TreeTr,
-  TreeHeadLabel,
-  LowerTreeBody,
-  TreeLeftCell,
-  TreeLeftCellText,
-  TreeRightCell,
-  Ball,
-  BallWrapper,
-  Content,
-} from "./stocks/Wrappers";
+import { IList } from "./interfaces";
+import { Content } from "./Wrappers";
+import Tree from "./Tree";
+import { IProps } from "./Tree/interfaces";
 
-const Homepage = ({ list }: IList) => {
+const Homepage = ({ tree }: IList) => {
   return (
     <Content>
-      {list
-        ? list.map((tree: IListItem, index) => {
-            return (
-              <TreeWrapper key={index}>
-                <TreeBody>
-                  <TreeTr>
-                    <TreeHeadLabel>{tree.treeName || ""}</TreeHeadLabel>
-                    <BallWrapper>
-                      {" "}
-                      <Ball />
-                    </BallWrapper>
-                  </TreeTr>
-                </TreeBody>
-                <LowerTreeBody>
-                  {tree.lower &&
-                    tree.lower.map((branch, index) => {
-                      return (
-                        <LowerTree key={index}>
-                          <TreeLeftCell>
-                            <TreeLeftCellText>{branch.field || ""}</TreeLeftCellText>
-                          </TreeLeftCell>
-                          <TreeRightCell>{branch.fieldLabel || ""}</TreeRightCell>
-                        </LowerTree>
-                      );
-                    })}
-                </LowerTreeBody>
-              </TreeWrapper>
-            );
-          })
-        : ""}
+      <Tree tree={tree} />
     </Content>
   );
 };
 
-Homepage.getInitialProps = (): IList => {
-  // const result = await fetch('http://localhost:3000/stocks/data.json')
+Homepage.getInitialProps = (): IProps => {
+  // const result = await fetch('/stocks/data.json') // Не хочет забирать данные с локалки
   return {
-    list: [
+    tree: [
       {
         treeName: "Общая информация",
         lower: [
@@ -117,6 +77,71 @@ Homepage.getInitialProps = (): IList => {
           {
             field: "Сотрудничество",
             fieldLabel: "1",
+          },
+        ],
+      },
+      {
+        treeName: "Дополнительные требования",
+        lower: [
+          {
+            field: "Инструменты",
+            lower: [
+              {
+                label: "Продвинутый уровень",
+              },
+              {
+                label: "Продвинутый уровень",
+              },
+            ],
+          },
+          {
+            field: "SAP ERP",
+          },
+          {
+            field: "SAP HR",
+          },
+          {
+            field: "Иностранные языки",
+            lower: [
+              {
+                label: "Продвинутый уровень",
+              },
+            ],
+          },
+          {
+            field: "Английский",
+          },
+          {
+            field: "Дерево",
+            lower: [
+              {
+                label: "Так что",
+              },
+              {
+                label: "Сюда можно сувать",
+              },
+              {
+                label: "Любые",
+              },
+              {
+                label: "Данные",
+              },
+              {
+                label: "И не должно произойти ничего плохово ",
+              },
+              {
+                label: ":) ",
+              },
+            ],
+          },
+          {
+            field: "Работает",
+          },
+          {
+            field: "Полностью",
+          },
+          {
+            field: "Динамически",
           },
         ],
       },
